@@ -1,0 +1,41 @@
+server:
+  port: 18080
+dubbo:
+  application:
+    name: dubbo-metrics-provider
+    logger: slf4j
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: fastjson2
+  registry:
+    id: zk-registry
+    address: zookeeper://127.0.0.1:2180
+  config-center:
+    address: zookeeper://127.0.0.1:2180
+  metadata-report:
+    address: zookeeper://127.0.0.1:2180
+  provider:
+    serialization: fastjson2
+  consumer:
+    serialization: fastjson2
+  metrics:
+    protocol: prometheus
+
+management:
+  server:
+    port: 18081
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: info,health,env,prometheus
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
